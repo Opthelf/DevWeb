@@ -1,11 +1,2 @@
-{% extends @EasyAdmin/page/content.html.twig' %}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content %}
-    <h1>Bienvenue sur mon tableau de bord personnalisé</h1>
-    <p>Voici quelques statistiques :</p>
-    <ul>
-        <li>Utilisateurs : {{ userCount }}</li>
-        <li>Produits : {{ productCount }}</li>
-        <li>Commandes : {{ orderCount }}</li>
-    </ul>
-{% endblock %}
