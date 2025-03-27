@@ -15,4 +15,8 @@ final class UtilisateurController extends AbstractController
             'controller_name' => 'UtilisateurController',
         ]);
     }
+    #[Route('/utilisateur/{id}', name: 'app_utilisateur_show')]
+    public function show($id): Response{
+        dd($id);
+    }
 }
