@@ -1,8 +1,4 @@
 easyadmin:
     resource: .
     type: easyadmin.routes
-    entities:
-        HistoriqueAction:
-            class: App\Entity\HistoriqueAction
-            controller: App\Controller\Admin\HistoriqueActionCrudController
-   
+    
