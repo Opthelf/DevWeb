@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
@@ -17,7 +19,13 @@ class Utilisateur
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Assert\All([
+        new Assert\Choice(choices: ['visiteur', 'utilisateur', 'admin'], message: 'Choix invalide pour le rôle.')
+    ])]
     private array $role = [];
+
+    #[ORM\Column]
+    private bool $isVerified = false;
 
     public function getId(): ?int
     {
@@ -44,6 +52,16 @@ class Utilisateur
     public function setRole(array $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+    public function getIsVerified(): bool
+    {
+        return $this->isVerified;
+    }
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

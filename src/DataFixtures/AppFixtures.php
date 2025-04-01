@@ -10,8 +10,9 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $product = new Utilisateur();
-        $product->setName("Simon");
+        $product->setName("SimondeDataFixtures");
         $product->setRole(["ROLE_ADMIN"]);
+       // $product->setIsVerified(true);
 
         $manager->persist($product);
 
