@@ -2,22 +2,19 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 
-
-class UtilisateurCrudController extends AbstractCrudController
+class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Utilisateur::class;
+        return User::class;
     }
 
     
@@ -25,16 +22,16 @@ class UtilisateurCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            ChoiceField::new('role')
+            TextField::new('username'),
+            ChoiceField::new('roles')
             ->setChoices([
-                'Visiteur' => 'visiteur',
-                'Utilisateur' => 'utilisateur',
-                'Admin' => 'admin',
+                'Visiteur' => 'ROLE_VISITEUR',
+                'Utilisateur' => 'ROLE_UTILISATEUR',
+                'Admin' => 'ROLE_ADMIN',
             ])
             ->allowMultipleChoices() // Permet de choisir plusieurs rôles
             ->setHelp('Choisissez un ou plusieurs rôles'),
-            BooleanField::new('isVerified')->renderAsSwitch(false), // Permet d’activer/désactiver un utilisateur
+            TextField::new('password')->hideOnIndex(), // Masque le champ mot de passe dans la liste
         ];
     }
     
