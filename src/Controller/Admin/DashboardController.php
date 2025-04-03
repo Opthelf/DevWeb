@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Utilisateur;
 use App\Entity\HistoriqueAction;
+use App\Entity\Objet;
 
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
@@ -41,6 +42,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard
     {
+        $this->denyAccessUnlessGranted('admin');
         return Dashboard::new()
             ->setTitle('ProjetDevWeb'); 
     }
@@ -50,6 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', Utilisateur::class);
         yield MenuItem::linkToCrud('Historique des actions', 'fas fa-history', HistoriqueAction::class);
+        yield MenuItem::linkToCrud('Gestion des objets', 'fas fa-cogs', Objet::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

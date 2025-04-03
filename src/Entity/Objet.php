@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ObjetRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ObjetRepository::class)]
@@ -14,6 +15,9 @@ class Objet
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     public function getId(): ?int
@@ -39,4 +43,17 @@ class Objet
 
         return $this;
     }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+    
 }
