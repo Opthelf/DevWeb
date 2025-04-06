@@ -55,6 +55,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs approuvés', 'fas fa-user', User::class)
            ->setController(ApprovedUserCrudController::class);
         yield MenuItem::linkToCrud('Gestion des objets', 'fas fa-cogs', Objet::class);
+        yield MenuItem::linkToRoute('Exporter en CSV', 'fas fa-file-csv', 'export_data', ['format' => 'csv']);
+        yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
