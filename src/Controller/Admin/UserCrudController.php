@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -18,14 +19,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use App\Service\UserActionLogger;
+
 
 class UserCrudController extends AbstractCrudController
 {
     private UserPasswordHasherInterface $passwordHasher;
+    private UserActionLogger $actionLogger;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher, UserActionLogger $actionLogger)
     {
         $this->passwordHasher = $passwordHasher;
+        $this->actionLogger = $actionLogger;
+        // Inject the password hasher service
     }
 
     public static function getEntityFqcn(): string
@@ -82,5 +89,6 @@ class UserCrudController extends AbstractCrudController
 
         parent::updateEntity($entityManager, $entityInstance);
     }
+    
     
 }

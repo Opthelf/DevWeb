@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Entity\Objet;
-
+use App\Entity\UserActionLog;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -57,6 +57,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gestion des objets', 'fas fa-cogs', Objet::class);
         yield MenuItem::linkToRoute('Exporter en CSV', 'fas fa-file-csv', 'export_data', ['format' => 'csv']);
         yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
+        yield MenuItem::linkToCrud('Journal des actions utilisateur', 'fas fa-history', UserActionLog::class)
+            ->setController(UserActionLogCrudController::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
