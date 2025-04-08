@@ -4,23 +4,23 @@ namespace App\Service;
 
 use App\Entity\UserActionLog;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class UserActionLogger
 {
     private EntityManagerInterface $entityManager;
-    private Security $security;
+    private RequestStack $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
-        $this->security = $security;
+        $this->requestStack = $requestStack;
     }
 
     public function log(string $action): void
     {
-        $user = $this->security->getUser();
-        $username = $user ? $user->getUserIdentifier() : 'anonymous';
+        $request = $this->requestStack->getCurrentRequest();
+        $username = $request->getSession()->get('username', 'anonymous'); // Récupérer le nom d'utilisateur depuis la session
 
         $log = new UserActionLog();
         $log->setUsername($username);

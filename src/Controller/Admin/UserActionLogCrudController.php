@@ -7,6 +7,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+
+
 
 class UserActionLogCrudController extends AbstractCrudController
 {
@@ -20,9 +23,9 @@ class UserActionLogCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            TextField::new('username'),
-            TextEditorField::new('action'),
-            TextField::new('timestamp')->setFormat('d/m/Y H:i:s'),
+            TextField::new('username', 'Utilisateur'),
+            TextField::new('action', 'Action'),
+            DateTimeField::new('timestamp', 'Date et heure'),
         ];
     }
     
