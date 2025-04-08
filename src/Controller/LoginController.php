@@ -10,14 +10,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
-    public function index(): Response
-    {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
-        ]);
-    }
-
     public function login(Request $request, SessionInterface $session): Response
     {
         // Exemple de connexion simple (à adapter selon vos besoins)
