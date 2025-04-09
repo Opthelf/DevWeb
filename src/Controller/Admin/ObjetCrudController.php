@@ -36,11 +36,17 @@ class ObjetCrudController extends AbstractCrudController
         ];
     }
 
+    
+
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('danger', 'Vous n\'avez pas les permissions nécessaires pour supprimer cet objet.');
+            return; // Empêche la suppression
+        }
         if ($entityInstance instanceof Objet) {
-            if ($entityInstance->isStatus() !== false) {
-                $this->addFlash('danger', 'Seuls les objets avec le statut "En attente" peuvent être supprimés.');
+            if ($entityInstance->isActif() !== false) {
+                $this->addFlash('danger', 'Seuls les objets inactif peuvent être supprimés.');
                 return; // Empêche la suppression
             }
         }
