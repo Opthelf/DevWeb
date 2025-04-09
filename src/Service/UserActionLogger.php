@@ -22,7 +22,8 @@ class UserActionLogger
         $request = $this->requestStack->getCurrentRequest();
         $session = $this->requestStack->getSession();
         
-        $username = $session->get('username','anonymous'); // Récupérer le nom d'utilisateur depuis la session
+        $username = $session->get('username');
+        dd($username); // Récupérer le nom d'utilisateur depuis la session
         $log = new UserActionLog();
         $log->setUsername($username);
         $log->setAction($action);
