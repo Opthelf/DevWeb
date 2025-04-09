@@ -52,7 +52,9 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
             yield MenuItem::linkToCrud('Journal des actions utilisateur', 'fas fa-history', UserActionLog::class)
                 ->setController(UserActionLogCrudController::class);
-           
+            yield MenuItem::linkToCrud('Demande ajout Objet', 'fas fa-user', Objet::class)
+                ->setController(DemandeObjetCrudController::class);
+             
         }
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
