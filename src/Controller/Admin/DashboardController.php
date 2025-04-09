@@ -39,16 +39,21 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Utilisateurs non approuvés', 'fas fa-user', User::class)
-           ->setController(NonApprovedUserCrudController::class);
-        yield MenuItem::linkToCrud('Utilisateurs approuvés', 'fas fa-user', User::class)
-           ->setController(ApprovedUserCrudController::class);
         yield MenuItem::linkToCrud('Gestion des objets', 'fas fa-cogs', Objet::class);
-        yield MenuItem::linkToRoute('Exporter en CSV', 'fas fa-file-csv', 'export_data', ['format' => 'csv']);
-        yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
-        yield MenuItem::linkToCrud('Journal des actions utilisateur', 'fas fa-history', UserActionLog::class)
-            ->setController(UserActionLogCrudController::class);
+
+        //Menu pour les admin
+        if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
+            yield MenuItem::linkToCrud('Utilisateurs non approuvés', 'fas fa-user', User::class)
+               ->setController(NonApprovedUserCrudController::class);
+            yield MenuItem::linkToCrud('Utilisateurs approuvés', 'fas fa-user', User::class)
+               ->setController(ApprovedUserCrudController::class);
+            yield MenuItem::linkToRoute('Exporter en CSV', 'fas fa-file-csv', 'export_data', ['format' => 'csv']);
+            yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
+            yield MenuItem::linkToCrud('Journal des actions utilisateur', 'fas fa-history', UserActionLog::class)
+                ->setController(UserActionLogCrudController::class);
+           
+        }
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
