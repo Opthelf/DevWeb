@@ -30,7 +30,8 @@ class ObjetCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextEditorField::new('description')->formatValue(fn ($value) => strip_tags($value)),
             BooleanField::new('status', 'À supprimer') // Champ pour le statut (true/false)
-                ->renderAsSwitch(false), // Affiche un switch dans le formulaire
+                ->renderAsSwitch(false)
+                ->hideOnIndex(), // Affiche un switch dans le formulaire
             BooleanField::new('actif', 'Actif') // Champ pour actif (true/false)
                 ->renderAsSwitch(false), 
         ];
