@@ -44,9 +44,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gestion des objets', 'fas fa-cogs', Objet::class);
        
 
-        yield MenuItem::linkToCrud('Demande ajout Objet', 'fas fa-user', Objet::class)
-        ->setController(DemandeObjetCrudController::class);
-     
+        
         //Menu pour les admin
         if ($this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
