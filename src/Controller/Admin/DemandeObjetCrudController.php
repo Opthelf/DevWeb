@@ -20,7 +20,7 @@ class DemandeObjetCrudController extends AbstractCrudController
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $qb->andWhere('entity.status = :status') // Utilisez :status comme placeholder
-           ->setParameter('status', 'pending'); // Assurez-vous que la valeur correspond à votre logique (par exemple, 'pending')
+           ->setParameter('status', false); // Assurez-vous que la valeur correspond à votre logique (par exemple, 'pending')
 
         return $qb;
     }

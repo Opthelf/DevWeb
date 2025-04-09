@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 
 class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
@@ -33,6 +35,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         $session->set('username', $user->getUsername());
 
         // Rediriger vers la page d'accueil ou une autre page
-        return new Response('', Response::HTTP_OK);
+        return new RedirectResponse($this->router->generate('app_homepage'));
+
     }
 }
