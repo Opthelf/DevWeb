@@ -36,6 +36,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isApproved = false;
 
+    #[ORM\Column]
+    private ?float $points = 0.0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,5 +122,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPoints(): ?float
+    {
+        return $this->points;
+    }
+
+    public function setPoints(float $points): static
+    {
+        $this->points = $points;
+
+        return $this;
     }
 }

@@ -56,6 +56,8 @@ class UserCrudController extends AbstractCrudController
             ->setHelp('Choisissez un ou plusieurs rôles'),
             TextField::new('password')->onlyOnForms(), // Masque le champ mot de passe dans la liste
             BooleanField::new('isApproved', 'Approved'),
+            NumberField::new('points', 'Points') // Ajout du champ points
+            ->setHelp('Nombre de points attribués à l\'utilisateur'),
         ];
     }
 
