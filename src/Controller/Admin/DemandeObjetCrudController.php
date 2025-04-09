@@ -19,7 +19,7 @@ class DemandeObjetCrudController extends AbstractCrudController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): \Doctrine\ORM\QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
-        $qb->andWhere('entity.status = :status') // Utilisez :status comme placeholder
+        $qb->andWhere('entity.statusDel = :status') // Utilisez :status comme placeholder
            ->setParameter('status', false); // Assurez-vous que la valeur correspond à votre logique (par exemple, 'pending')
 
         return $qb;

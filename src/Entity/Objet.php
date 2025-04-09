@@ -21,7 +21,10 @@ class Objet
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?bool $status = false;  
+    private ?bool $statusDel = false;
+
+    #[ORM\Column]
+    private ?bool $actif = false;  
 
     public function getId(): ?int
     {
@@ -61,12 +64,24 @@ class Objet
 
     public function isStatus(): ?bool
     {
-        return $this->status;
+        return $this->statusDel;
     }
 
     public function setStatus(bool $status): static
     {
-        $this->status = $status;
+        $this->status = $statusDel;
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): static
+    {
+        $this->actif = $actif;
 
         return $this;
     }
