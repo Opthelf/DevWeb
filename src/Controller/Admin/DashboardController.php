@@ -42,12 +42,11 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Gestion des objets', 'fas fa-cogs', Objet::class);
-        yield MenuItem::linkToRoute('Supprimer tous les objets', 'fas fa-trash', 'admin_delete_category', [
-            'entity' => 'objet',
-        ])->setCssClass('text-danger');
-        yield MenuItem::linkToRoute('Supprimer tous le journal', 'fas fa-trash', 'admin_delete_category', [
-            'entity' => 'UserActionLog',
-        ])->setCssClass('text-danger');
+       
+
+        yield MenuItem::linkToCrud('Demande ajout Objet', 'fas fa-user', Objet::class)
+        ->setController(DemandeObjetCrudController::class);
+     
         //Menu pour les admin
         if ($this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
@@ -61,11 +60,14 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToRoute('Exporter en CSV', 'fas fa-file-csv', 'export_data', ['format' => 'csv']);
             yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
             
+            yield MenuItem::linkToRoute('Supprimer tous les objets', 'fas fa-trash', 'admin_delete_category', [
+                'entity' => 'objet',
+            ])->setCssClass('text-danger');
+            yield MenuItem::linkToRoute('Supprimer tous le journal', 'fas fa-trash', 'admin_delete_category', [
+                'entity' => 'UserActionLog',
+            ])->setCssClass('text-danger');
             
-            
-            yield MenuItem::linkToCrud('Demande ajout Objet', 'fas fa-user', Objet::class)
-                ->setController(DemandeObjetCrudController::class);
-             
+           
         }
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

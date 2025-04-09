@@ -21,7 +21,7 @@ class Objet
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?bool $status = null;
+    private ?bool $status = false;  
 
     public function getId(): ?int
     {
