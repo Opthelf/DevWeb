@@ -22,12 +22,12 @@ class SearchController extends AbstractController
         $queryBuilder = $entityManager->getRepository('App\Entity\User')->createQueryBuilder('u');
 
         if ($searchTerm) {
-            $queryBuilder->andWhere('u.username LIKE :searchTerm OR u.email LIKE :searchTerm')
+            $queryBuilder->andWhere('u.username LIKE :searchTerm OR u.points LIKE :searchTerm')
                 ->setParameter('searchTerm', '%' . $searchTerm . '%');
         }
 
         if ($filter1) {
-            $queryBuilder->andWhere('u.role = :filter1')
+            $queryBuilder->andWhere('u.roles = :filter1')
                 ->setParameter('filter1', $filter1);
         }
 
