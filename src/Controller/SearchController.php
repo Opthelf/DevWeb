@@ -31,10 +31,10 @@ class SearchController extends AbstractController
                 ->setParameter('filter1', $filter1);
         }
 
-        if ($filter2) {
+        /*if ($filter2) {
             $queryBuilder->andWhere('u.status = :filter2')
                 ->setParameter('filter2', $filter2);
-        }
+        }*/
 
         $results = $queryBuilder->getQuery()->getResult();
 
