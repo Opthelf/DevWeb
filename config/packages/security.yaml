@@ -39,7 +39,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          #- { path: ^/admin, roles: ROLE_ADMIN }
-         #- { path: ^/secured-area, roles: ROLE_USER, allow_if: 'is_granted("IS_AUTHENTICATED_FULLY") and user.isApproved()' }
+        - { path: ^/secured-area, roles: ROLE_USER, allow_if: 'is_granted("IS_AUTHENTICATED_FULLY") and user.isApproved() and user.getPoints() > 5' }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
