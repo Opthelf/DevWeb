@@ -24,7 +24,10 @@ class Objet
     private ?bool $status = false;
 
     #[ORM\Column]
-    private ?bool $actif = null;  
+    private ?bool $actif = null;
+
+    #[ORM\Column]
+    private array $zone = [];  
 
     public function getId(): ?int
     {
@@ -82,6 +85,18 @@ class Objet
     public function setActif(bool $actif): static
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getZone(): array
+    {
+        return $this->zone;
+    }
+
+    public function setZone(array $zone): static
+    {
+        $this->zone = $zone;
 
         return $this;
     }
