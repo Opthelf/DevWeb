@@ -36,8 +36,9 @@ class UserCrudController extends AbstractCrudController
             TextField::new('username'),
             ChoiceField::new('roles')
             ->setChoices([
-                'Visiteur' => 'ROLE_VISITEUR',
-                'Utilisateur' => 'ROLE_UTILISATEUR',
+                'Visiteur' => 'ROLE_VISITOR',
+                'Utilisateur Simple' => 'ROLE_SIMPLE',
+                'Utilisateur Avancé' => 'ROLE_ADVANCED',
                 'Admin' => 'ROLE_ADMIN',
             ])
             ->allowMultipleChoices() // Permet de choisir plusieurs rôles
