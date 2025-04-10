@@ -3,8 +3,11 @@
     
     <select name="filter1">
         <option value="">Filtre 1</option>
-        <option value="admin" {% if filter1 == 'admin' %}selected{% endif %}>Admin</option>
-        <option value="user" {% if filter1 == 'user' %}selected{% endif %}>User</option>
+        <option value="ROLE_VISITEUR" {% if filter1 == 'ROLE_VISITEUR' %}selected{% endif %}>Visiteur</option>
+        <option value="ROLE_SIMPLE" {% if filter1 == 'ROLE_SIMPLE' %}selected{% endif %}>Utilisateur Simple</option>
+        <option value="ROLE_COMPLEXE" {% if filter1 == 'ROLE_COMPLEXE' %}selected{% endif %}>Utilisateur Complexe</option>
+        <option value="ROLE_ADMIN" {% if filter1 == 'ROLE_ADMIN' %}selected{% endif %}>Admin</option>
+</select>
     </select>
     
     <select name="filter2">

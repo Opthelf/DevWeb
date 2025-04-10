@@ -27,14 +27,15 @@ class SearchController extends AbstractController
         }
 
         if ($filter1) {
-            $queryBuilder->andWhere('u.roles = :filter1')
-                ->setParameter('filter1', $filter1);
+            $queryBuilder->andWhere('u.roles LIKE :filter1')
+                ->setParameter('filter1','%"'.$filter1.'"%');
         }
 
-        /*if ($filter2) {
-            $queryBuilder->andWhere('u.status = :filter2')
-                ->setParameter('filter2', $filter2);
-        }*/
+        if ($filter2) {
+            $isApproved = $filter2 === 'active' ? true : false;
+            $queryBuilder->andWhere('u.isApproved = :filter2')
+                ->setParameter('filter2', $isApproved);
+        }
 
         $results = $queryBuilder->getQuery()->getResult();
 
@@ -58,7 +59,7 @@ class SearchController extends AbstractController
         $queryBuilder = $entityManager->getRepository('App\Entity\Objet')->createQueryBuilder('o');
 
         if ($searchTerm) {
-            $queryBuilder->andWhere('o.nom LIKE :searchTerm OR o.description LIKE :searchTerm OR JSON_CONTAINS(o.zone, :searchTerm) = 1')
+            $queryBuilder->andWhere('o.nom LIKE :searchTerm OR o.description LIKE :searchTerm OR o.zone LIKE :searchTerm ')
                 ->setParameter('searchTerm', '%' . $searchTerm . '%');
         }
 
