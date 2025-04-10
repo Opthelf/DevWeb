@@ -40,8 +40,15 @@ class UserCrudController extends AbstractCrudController
                 'Utilisateur Simple' => 'ROLE_SIMPLE',
                 'Utilisateur Avancé' => 'ROLE_ADVANCED',
                 'Admin' => 'ROLE_ADMIN',
+            ]),
+            ChoiceField::new('type')
+            ->setChoices([
+                'Chercheur' => 'Chercheur',
+                'Etudiant' => 'Etudiant',
+                'Enseignant' => 'Enseignant',
+                'Enseignant-Chercheur' => 'Enseignant-Chercheur',
             ])
-            ->allowMultipleChoices() // Permet de choisir plusieurs rôles
+            //->allowMultipleChoices() // Permet de choisir plusieurs rôles
             ->setHelp('Choisissez un ou plusieurs rôles'),
             TextField::new('password')->onlyOnForms(), // Masque le champ mot de passe dans la liste
         ];

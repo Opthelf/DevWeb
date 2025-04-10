@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,6 +22,28 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('nom', null, [
+                'label' => 'Nom',
+            ])
+            ->add('prenom', null, [
+                'label' => 'Prénom',
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Adresse email',
+            ])
+            ->add('age', IntegerType::class, [
+                'label' => 'Âge',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'L\'âge est obligatoire.',
+                    ]),
+                    new \Symfony\Component\Validator\Constraints\Range([
+                        'min' => 0,
+                        'max' => 120,
+                        'notInRangeMessage' => 'L\'âge doit être compris entre {{ min }} et {{ max }} ans.',
+                    ]),
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -26,6 +52,25 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Chercheur' => 'Chercheur',
+                    'Etudiant' => 'Etudiant',
+                    'Enseignant' => 'Enseignant',
+                    'Enseignant-Chercheur' => 'Enseignant-Chercheur',
+                ],
+                'label' => 'Type',
+            ])
+            ->add('genre', ChoiceType::class, [
+                'choices' => [
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme',
+                    'Autres' => 'Autres',
+                ],
+                'label' => 'Type',
+            ])
+            
+
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
