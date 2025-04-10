@@ -2,7 +2,7 @@
     <input type="text" name="q" placeholder="Rechercher..." value="{{ searchTerm ?? '' }}">
     
     <select name="filter1">
-        <option value="">Filtre 1</option>
+        <option value=""></option>
         <option value="ROLE_VISITEUR" {% if filter1 == 'ROLE_VISITEUR' %}selected{% endif %}>Visiteur</option>
         <option value="ROLE_SIMPLE" {% if filter1 == 'ROLE_SIMPLE' %}selected{% endif %}>Utilisateur Simple</option>
         <option value="ROLE_COMPLEXE" {% if filter1 == 'ROLE_COMPLEXE' %}selected{% endif %}>Utilisateur Complexe</option>
@@ -11,9 +11,9 @@
     </select>
     
     <select name="filter2">
-        <option value="">Filtre 2</option>
-        <option value="active" {% if filter2 == 'active' %}selected{% endif %}>Actif</option>
-        <option value="inactive" {% if filter2 == 'inactive' %}selected{% endif %}>Inactif</option>
+        <option value=""></option>
+        <option value="active" {% if filter2 == 'active' %}selected{% endif %}>Validé</option>
+        <option value="inactive" {% if filter2 == 'inactive' %}selected{% endif %}>Non validé</option>
     </select>
     
     <button type="submit">Rechercher</button>
