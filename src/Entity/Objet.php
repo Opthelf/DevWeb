@@ -26,8 +26,10 @@ class Objet
     #[ORM\Column]
     private ?bool $actif = null;
 
-    #[ORM\Column]
-    private array $zone = [];  
+    #[ORM\Column(length: 50)]
+    private ?string $zone = null;
+
+   
 
     public function getId(): ?int
     {
@@ -89,16 +91,20 @@ class Objet
         return $this;
     }
 
-    public function getZone(): array
+    public function getZone(): ?string
     {
         return $this->zone;
     }
 
-    public function setZone(array $zone): static
+    public function setZone(string $zone): static
     {
         $this->zone = $zone;
 
         return $this;
     }
+
+    
+
+    
     
 }

@@ -28,12 +28,21 @@ class ObjetCrudController extends AbstractCrudController
         return [
             //IdField::new('id'),
             TextField::new('nom'),
-            TextEditorField::new('description')->formatValue(fn ($value) => strip_tags($value)),
+            TextField::new('description'),
             BooleanField::new('status', 'À supprimer') // Champ pour le statut (true/false)
                 ->renderAsSwitch(false)
                 ->hideOnIndex(), // Affiche un switch dans le formulaire
             BooleanField::new('actif', 'Actif') // Champ pour actif (true/false)
-                ->renderAsSwitch(false), 
+                ->renderAsSwitch(false),
+            ChoiceField::new('zone')
+                ->setChoices([
+                    'Zone 1' => 'zone1',
+                    'Zone 2' => 'zone2',
+                    'Zone 3' => 'zone3',
+                    // Ajoutez d'autres zones si nécessaire
+                ])
+                ->setRequired(true)
+                ->setLabel('Zone'), 
         ];
     }
 
