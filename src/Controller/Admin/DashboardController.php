@@ -55,9 +55,12 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Journal des actions utilisateur', 'fas fa-history', UserActionLog::class)
                ->setController(UserActionLogCrudController::class);
            
-            yield MenuItem::linkToRoute('Exporter en CSV', 'fas fa-file-csv', 'export_data', ['format' => 'csv']);
-            yield MenuItem::linkToRoute('Exporter en PDF', 'fas fa-file-pdf', 'export_data', ['format' => 'pdf']);
+            yield MenuItem::linkToRoute('User CSV', 'fas fa-file-csv', 'export_data_user', ['format' => 'csv']);
+            yield MenuItem::linkToRoute('User PDF', 'fas fa-file-pdf', 'export_data_user', ['format' => 'pdf']);
             
+            yield MenuItem::linkToRoute('Objet CSV', 'fas fa-file-csv', 'export_data_objet', ['format' => 'csv']);
+            yield MenuItem::linkToRoute('Objet PDF', 'fas fa-file-pdf', 'export_data_objet', ['format' => 'pdf']);
+
             yield MenuItem::linkToRoute('Supprimer tous les objets', 'fas fa-trash', 'admin_delete_category', [
                 'entity' => 'objet',
             ])->setCssClass('text-danger');
