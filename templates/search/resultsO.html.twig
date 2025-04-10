@@ -3,14 +3,14 @@
     
     <select name="filter1">
         <option value="">Filtre 1</option>
-        <option value="actif" {% if filter1 == 'true' %}selected{% endif %}>Actif</option>
-        <option value="inactif" {% if filter1 == 'false' %}selected{% endif %}>Inactif</option>
+        <option value="actif" {% if filter1 == 'actif' %}selected{% endif %}>Actif</option>
+        <option value="inactif" {% if filter1 == 'inactif' %}selected{% endif %}>Inactif</option>
     </select>
     
     <select name="filter2">
         <option value="">Filtre 2</option>
-        <option value="à supp" {% if filter2 == 'true' %}selected{% endif %}>à supprimer</option>
-        <option value="à garder" {% if filter2 == 'false' %}selected{% endif %}>à garder</option>
+        <option value="true" {% if filter2 == 'true' %}selected{% endif %}>À supprimer</option>
+        <option value="false" {% if filter2 == 'false' %}selected{% endif %}>À garder</option>
     </select>
     
     <button type="submit">Rechercher</button>

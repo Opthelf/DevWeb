@@ -64,13 +64,15 @@ class SearchController extends AbstractController
         }
 
         if ($filter1) {
+            $isActif = $filter1 === 'actif' ? true : false; // Convertir "actif"/"inactif" en booléen
             $queryBuilder->andWhere('o.actif = :filter1')
-                ->setParameter('filter1', $filter1);
+                ->setParameter('filter1', $isActif);
         }
 
         if ($filter2) {
+            $status = $filter2 === 'true' ? true : false; // Convertir "true"/"false" en booléen
             $queryBuilder->andWhere('o.status = :filter2')
-                ->setParameter('filter2', $filter2);
+                ->setParameter('filter2', $status);
         }
 
         $results = $queryBuilder->getQuery()->getResult();
