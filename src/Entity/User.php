@@ -46,9 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $age = null;
 
-    #[ORM\Column]
-    private array $genre = [];
-
    
     #[ORM\Column(length: 255)]
     private ?string $type = null;
@@ -64,6 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $genre = null;
 
 
     public function getId(): ?int
@@ -187,17 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getGenre(): array
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(array $genre): static
-    {
-        $this->genre = $genre;
-
-        return $this;
-    }
+    
 
    
 
@@ -257,6 +247,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): static
+    {
+        $this->genre = $genre;
 
         return $this;
     }
