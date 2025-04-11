@@ -11,6 +11,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+
 
 
 
@@ -33,6 +35,7 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
+            EmailField::new('email'),
             TextField::new('username'),
             ChoiceField::new('roles')
             ->setChoices([
@@ -40,7 +43,8 @@ class UserCrudController extends AbstractCrudController
                 'Utilisateur Simple' => 'ROLE_SIMPLE',
                 'Utilisateur Avancé' => 'ROLE_ADVANCED',
                 'Admin' => 'ROLE_ADMIN',
-            ]),
+            ])
+            ->allowMultipleChoices(),
             ChoiceField::new('type')
             ->setChoices([
                 'Chercheur' => 'Chercheur',
@@ -48,7 +52,7 @@ class UserCrudController extends AbstractCrudController
                 'Enseignant' => 'Enseignant',
                 'Enseignant-Chercheur' => 'Enseignant-Chercheur',
             ])
-            //->allowMultipleChoices() // Permet de choisir plusieurs rôles
+             // Permet de choisir plusieurs rôles
             ->setHelp('Choisissez un ou plusieurs rôles'),
             TextField::new('password')->onlyOnForms(), // Masque le champ mot de passe dans la liste
         ];
