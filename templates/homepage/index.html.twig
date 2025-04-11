@@ -1,33 +1,340 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} University Homepage{% endblock %}
+
+{% extends 'base.html.twig' %}
+{% block title %}Accueil - Plateforme Intelligente CY Tech{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .hero-section {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-custom {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-free-tour {
+            background-color: #e74c3c;
+        }
+
+        .btn-recherche {
+            background-color: #f39c12;
+        }
+
+        .btn-compte {
+            background-color: #3498db;
+        }
+
+        .btn-deconnexion {
+            background-color: #e74c3c;
+        }
+
+        .btn-inscription {
+            background-color: #2ecc71;
+        }
+
+        .btn-connexion {
+            background-color: #2ecc71;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 300px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-custom {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .news-section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #6e48aa;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: #6e48aa;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .news-excerpt {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .news-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: #f0e6ff;
+            color: #6e48aa;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .all-events-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+    </style>
+{% endblock %}
 
 {% block body %}
-<header>
-    <h1>Welcome to Our University</h1>
-</header>
-<nav>
-    <a href="#about">About</a>
-    <a href="#programs">Programs</a>
-    <a href="#admissions">Admissions</a>
-    <a href="#contact">Contact</a>
-    <a href="/admin">Admin</a>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+<div class="hero-section">
+    <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+         alt="Plateforme intelligente CY Tech" 
+         class="hero-image">
 
+    <div class="hero-content">
+        <h1 class="hero-title">Bienvenue sur la plateforme intelligente de l'école</h1>
+        <p class="hero-subtitle">Découvrez les infos locales, actualités, événements et services.</p>
+        
+        <div class="action-buttons">
+        
+    
+  
 
-</nav>
-<section class="hero">
-    <h2>Shaping the Future Through Education</h2>
-    <p>Join us and explore endless opportunities.</p>
-</section>
-<section class="content">
-    <h3>About Our University</h3>
-    <p>We are a leading institution dedicated to academic excellence, research, and innovation.</p>
-</section>
-<footer>
-    <p>&copy; 2025 Our University. All Rights Reserved.</p>
-</footer>
+           
+            <a href="{{ path('app_search_user') }}" class="btn btn-custom btn-recherche">
+                <i class="fas fa-search me-2"></i> Rechercher un utilisateur
+            </a>
+            
+            {% if app.user %}
+                <a href="{{ path('admin') }}" class="btn btn-custom btn-compte">
+                    <i class="fas fa-user-circle me-2"></i> Mon compte
+                </a>
+                <a href="{{ path('app_logout') }}" class="btn btn-custom btn-deconnexion">
+                    <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                </a>
+            {% else %}
+                <a href="{{ path('inscription') }}" class="btn btn-custom btn-inscription">
+                    <i class="fas fa-user-plus me-2"></i> S'inscrire
+                </a>
+                <a href="{{ path('login') }}" class="btn btn-custom btn-connexion">
+                    <i class="fas fa-sign-in-alt me-2"></i> Connexion
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
+<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
+<div class="container">
+    <!-- Section Actualités et Événements -->
+    <section class="news-section">
+        <h2 class="section-title">Actualités & Événements</h2>
+        
+        <div class="news-grid">
+            <!-- Actualité 1 -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Portes ouvertes" class="news-image">
+                <div class="news-content">
+                    <span class="news-date">15 juin 2024</span>
+                    <span class="news-category">Événement</span>
+                    <h3 class="news-title">Journée Portes Ouvertes</h3>
+                    <p class="news-excerpt">Découvrez notre école et ses formations lors de notre journée portes ouvertes annuelle.</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">En savoir plus</a>
+                </div>
+            </div>
+
+            <!-- Actualité 2 -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Nouveau laboratoire" class="news-image">
+                <div class="news-content">
+                    <span class="news-date">5 juin 2024</span>
+                    <span class="news-category">Actualité</span>
+                    <h3 class="news-title">Ouverture du nouveau labo IoT</h3>
+                    <p class="news-excerpt">Un tout nouveau laboratoire dédié aux objets connectés vient d'être inauguré.</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">En savoir plus</a>
+                </div>
+            </div>
+
+            <!-- Actualité 3 -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Menu cantine" class="news-image">
+                <div class="news-content">
+                    <span class="news-date">1 juin 2024</span>
+                    <span class="news-category">Restauration</span>
+                    <h3 class="news-title">Nouveau menu à la cantine</h3>
+                    <p class="news-excerpt">Découvrez les nouveaux plats bio et locaux proposés à la cafétéria.</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">Voir le menu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="all-events-link">
+            <a href="{{ path('app_search_user') }}" class="btn btn-primary">
+                <i class="fas fa-calendar-alt me-2"></i> Voir tous les événements
+            </a>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section class="news-section">
+        <h2 class="section-title">Services en ligne</h2>
+        
+        <div class="news-grid">
+            <!-- Service 1 -->
+            <div class="news-card">
+                <div class="news-content">
+                    <span class="news-category">Service</span>
+                    <h3 class="news-title">Emploi du temps</h3>
+                    <p class="news-excerpt">Consultez votre emploi du temps en temps réel et recevez les modifications.</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">Accéder</a>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="news-card">
+                <div class="news-content">
+                    <span class="news-category">Service</span>
+                    <h3 class="news-title">Réservation de salles</h3>
+                    <p class="news-excerpt">Réservez les salles de travail en groupe ou les laboratoires spécialisés.</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">Réserver</a>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="news-card">
+                <div class="news-content">
+                    <span class="news-category">Service</span>
+                    <h3 class="news-title">Campus virtuel</h3>
+                    <p class="news-excerpt">Accédez à tous vos cours en ligne et ressources pédagogiques.</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">Se connecter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Font Awesome pour les icônes -->
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 {% endblock %}
