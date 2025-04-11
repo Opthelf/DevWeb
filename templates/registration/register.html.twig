@@ -1,27 +1,217 @@
 {% extends 'base.html.twig' %}
+{% block title %}Inscription - Plateforme CY Tech{% endblock %}
 
-{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .registration-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
 
+        .registration-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #6e48aa;
+        }
+
+        .registration-header h2 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .registration-header p {
+            color: #6c757d;
+        }
+
+        .registration-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .registration-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .registration-form input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .registration-form input:focus {
+            border-color: #6e48aa;
+            box-shadow: 0 0 0 0.2rem rgba(110, 72, 170, 0.25);
+            outline: none;
+        }
+
+        .registration-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #6e48aa;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .registration-btn:hover {
+            background-color: #5d3a92;
+        }
+
+        .registration-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #6c757d;
+        }
+
+        .registration-footer a {
+            color: #6e48aa;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .registration-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .password-requirements {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .name-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 576px) {
+            .name-fields {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="registration-container">
+    <div class="registration-header">
+        <h2>Créer un compte</h2>
+        <p>Rejoignez notre plateforme intelligente</p>
+    </div>
 
-    {{ form_errors(registrationForm) }}
+    {{ form_start(registrationForm, { 'attr': { 'class': 'registration-form' } }) }}
+        <div class="name-fields">
+            <div class="form-group">
+                {{ form_row(registrationForm.nom, {
+                    'label': 'Nom',
+                    'attr': { 'placeholder': 'Votre nom' }
+                }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.prenom, {
+                    'label': 'Prénom',
+                    'attr': { 'placeholder': 'Votre prénom' }
+                }) }}
+            </div>
+        </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.genre) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.username, {
+                'label': 'Nom d\'utilisateur',
+                'attr': { 'placeholder': 'Votre nom d\'utilisateur' }
+            }) }}
+        </div>
 
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.age) }}
-        {{ form_row(registrationForm.type) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.genre, {
+                'label': 'Genre'
+            }) }}
+        </div>
 
-        <button type="submit" class="btn">Register</button>
+        <div class="form-group">
+            {{ form_row(registrationForm.email, {
+                'label': 'Adresse email',
+                'attr': { 'placeholder': 'exemple@cy-tech.fr' }
+            }) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.age, {
+                'label': 'Âge',
+                'attr': { 'placeholder': 'Votre âge' }
+            }) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.type, {
+                'label': 'Type'
+            }) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.plainPassword, {
+                'label': 'Mot de passe',
+                'attr': { 'placeholder': '••••••••' }
+            }) }}
+            <div class="password-requirements">
+                <i class="fas fa-info-circle"></i> 8 caractères minimum, avec majuscule et chiffre
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.agreeTerms, {
+                'label': 'Accepter les termes'
+            }) }}
+        </div>
+
+        <button type="submit" class="registration-btn">
+            <i class="fas fa-user-plus me-2"></i> S'inscrire
+        </button>
     {{ form_end(registrationForm) }}
+
+    <div class="registration-footer">
+        <p>Déjà un compte ? <a href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt me-1"></i> Se connecter</a></p>
+        <a href="{{ path('app_homepage') }}"><i class="fas fa-arrow-left me-1"></i> Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Intégration de Font Awesome pour les icônes -->
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+    
+    <!-- Validation en temps réel optionnelle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            
+            passwordInput.addEventListener('input', function() {
+                // Exemple de validation visuelle
+                if (this.value.length > 0 && this.value.length < 8) {
+                    this.style.borderColor = '#dc3545';
+                } else {
+                    this.style.borderColor = '#28a745';
+                }
+            });
+        });
+    </script>
 {% endblock %}
