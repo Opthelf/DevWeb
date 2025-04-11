@@ -26,7 +26,7 @@ class DashboardController extends AbstractDashboardController
 
     public function index(): Response
     {
-        $this->actionLogger->log('Accès au tableau de bord'); // Exemple d'action enregistrée
+        $this->actionLogger->log('Accès au tableau de bord', 0.25); // Exemple d'action enregistrée
 
         return $this->render('admin/dashboard.html.twig');
     }   
