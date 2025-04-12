@@ -46,7 +46,7 @@ class DashboardController extends AbstractDashboardController
 
         
         //Menu pour les admin
-        //if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
             yield MenuItem::linkToCrud('Utilisateurs non approuvés', 'fas fa-user', User::class)
                ->setController(NonApprovedUserCrudController::class);
@@ -69,7 +69,7 @@ class DashboardController extends AbstractDashboardController
             ])->setCssClass('text-danger');
             
            
-        //}
+        }
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
