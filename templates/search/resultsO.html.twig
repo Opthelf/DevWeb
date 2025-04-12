@@ -1,28 +1,128 @@
-<form action="{{ path('app_search_objet') }}" method="get" class="search-form">
-    <input type="text" name="q" placeholder="Rechercher..." value="{{ searchTerm ?? '' }}">
-    
-    <select name="filter1">
-        <option value="">Filtre 1</option>
-        <option value="actif" {% if filter1 == 'actif' %}selected{% endif %}>Actif</option>
-        <option value="inactif" {% if filter1 == 'inactif' %}selected{% endif %}>Inactif</option>
-    </select>
-    
-    <select name="filter2">
-        <option value="">Filtre 2</option>
-        <option value="true" {% if filter2 == 'true' %}selected{% endif %}>À supprimer</option>
-        <option value="false" {% if filter2 == 'false' %}selected{% endif %}>À garder</option>
-    </select>
-    
-    <button type="submit">Rechercher</button>
-</form>
-<h1>Résultats de la recherche</h1>
+{% extends 'base.html.twig' %}
+{% block title %}Recherche d'objets{% endblock %}
 
-{% if results is not empty %}
-    <ul>
-        {% for obj in results %}
-            <li>{{ obj.nom }} - {{ obj.description }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>Aucun résultat trouvé.</p>
-{% endif %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+    .search-container {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: 2rem auto;
+    }
+
+    .search-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .search-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+
+    .search-form input,
+    .search-form select {
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+    }
+
+    .search-form button {
+        background-color: #6f42c1;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .search-form button:hover {
+        background-color: #5e37a8;
+    }
+
+    .results {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+    }
+
+    .results ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .results li {
+        background: white;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        font-weight: 500;
+    }
+
+    .results p {
+        color: #888;
+        font-style: italic;
+    }
+</style>
+
+<div class="search-container">
+    <h1>🔍 Recherche d'objets</h1>
+
+    <form action="{{ path('app_search_objet') }}" method="get" class="search-form">
+        <input type="text" name="q" placeholder="Rechercher..." value="{{ searchTerm ?? '' }}">
+
+        <select name="filter1">
+            <option value="">Filtre 1</option>
+            <option value="actif" {% if filter1 == 'actif' %}selected{% endif %}>Actif</option>
+            <option value="inactif" {% if filter1 == 'inactif' %}selected{% endif %}>Inactif</option>
+        </select>
+
+        <select name="filter2">
+            <option value="">Filtre 2</option>
+            <option value="true" {% if filter2 == 'true' %}selected{% endif %}>À supprimer</option>
+            <option value="false" {% if filter2 == 'false' %}selected{% endif %}>À garder</option>
+        </select>
+
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <div class="results">
+        <h2>Résultats de la recherche</h2>
+
+        {% if results is not empty %}
+            <ul>
+                {% for obj in results %}
+                    <li>{{ obj.nom }} - {{ obj.description }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun résultat trouvé.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="action-buttons">
+    <a href="{{ path('app_homepage') }}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Retour à l'accueil
+    </a>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+{% endblock %}

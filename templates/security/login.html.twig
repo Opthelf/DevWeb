@@ -1,41 +1,125 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            background-color: #f8f9fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container h1 {
+            color: #6f42c1;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-container p {
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+			color: #000000 !important;
+
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            background-color: white !important; /* << ici le correctif */
+            color: black !important;            /* << ici aussi */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #6f42c1;
+            box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .footer-links {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a {
+            color: #6f42c1;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .alert {
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    <div class="login-container">
+        <h1>Connexion</h1>
+        <p>Accédez à votre espace personnel</p>
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
+        <form method="post">
+            {% if error %}
+                <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Username</label>
-        <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                </div>
+            {% endif %}
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" value="{{ last_username }}" name="_username" id="username" autocomplete="username" required autofocus>
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            <label for="password">Mot de passe</label>
+            <input type="password" name="_password" id="password" autocomplete="current-password" required>
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+            <button type="submit">Se connecter</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="{{ path('app_homepage') }}">Retour à l'accueil</a> •
+            <a href="{{ path('app_register') }}">Créer un compte</a>
+        </div>
+    </div>
 {% endblock %}

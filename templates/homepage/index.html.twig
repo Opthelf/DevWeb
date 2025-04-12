@@ -58,6 +58,8 @@
             font-weight: 600;
             transition: all 0.3s ease;
             border: none;
+			color: white !important; /* Force le texte en blanc pour tous les boutons */
+
         }
 
         .btn-custom:hover {
@@ -190,10 +192,6 @@
             font-weight: 600;
         }
 
-        .all-events-link {
-            text-align: center;
-            margin-top: 2rem;
-        }
 
     </style>
 {% endblock %}
@@ -242,8 +240,7 @@
 
 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-<div class="container">
-    <!-- Section Actualités et Événements -->
+<div class="container mx-auto" style="max-width: 1200px; padding: 0 2rem;">    <!-- Section Actualités et Événements -->
     <section class="news-section">
         <h2 class="section-title">Actualités & Événements</h2>
         
@@ -288,11 +285,7 @@
             </div>
         </div>
 
-        <div class="all-events-link">
-            <a href="{{ path('app_search_user') }}" class="btn btn-primary">
-                <i class="fas fa-calendar-alt me-2"></i> Voir tous les événements
-            </a>
-        </div>
+        
     </section>
 
     <!-- Section Services -->
