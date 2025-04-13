@@ -21,10 +21,12 @@
         "symfony/framework-bundle": "7.2.*",
         "symfony/http-foundation": "7.2.*",
         "symfony/http-kernel": "7.2.*",
+        "symfony/mailer": "7.2.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/runtime": "7.2.*",
         "symfony/security-bundle": "7.2.*",
         "symfony/security-core": "7.2.*",
+        "symfony/sendgrid-mailer": "7.2.*",
         "symfony/twig-bundle": "7.2.*",
         "symfony/yaml": "7.2.*",
         "symfonycasts/verify-email-bundle": "^1.17"

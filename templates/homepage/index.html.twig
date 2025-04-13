@@ -192,6 +192,11 @@
             font-weight: 600;
         }
 
+        .btn-profile {
+            background-color: #6e48aa;
+            color: white;
+        }
+
 
     </style>
 {% endblock %}
@@ -225,6 +230,10 @@
                 </a>
                 <a href="{{ path('app_logout') }}" class="btn btn-custom btn-deconnexion">
                     <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                </a>
+
+                <a href="{{ path('app_user_profile') }}" class="btn btn-custom btn-profile">
+                    <i class="fas fa-user me-2"></i> Mon Profil
                 </a>
             {% else %}
                 <a href="{{ path('app_register') }}" class="btn btn-custom btn-inscription">

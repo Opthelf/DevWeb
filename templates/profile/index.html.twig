@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil - {{ user.username }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 2rem;
+            border: 4px solid #6e48aa;
+        }
+        
+        .profile-info h2 {
+            color: #6e48aa;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .detail-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .detail-card h3 {
+            color: #6e48aa;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        
+        .profile-actions {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 576px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="profile-container">
+    <div class="profile-header">
+        {% if user.profileImage %}
+            <img src="{{ asset('uploads/profiles/' ~ user.profileImage) }}" 
+                 alt="Photo de profil de {{ user.nom }}" 
+                 class="profile-avatar">
+        {% else %}
+            <img src="https://ui-avatars.com/api/?name={{ user.nom|url_encode }}+{{ user.prenom|url_encode }}&background=6e48aa&color=fff" 
+                 alt="Avatar de {{ user.nom }}" 
+                 class="profile-avatar">
+        {% endif %}
+        
+        <div class="profile-info">
+            <h2>{{ user.nom }} {{ user.prenom }}</h2>
+            <p>@{{ user.username }}</p>
+            <p class="text-muted">{{ user.points }} points</p>
+        </div>
+    </div>
+    
+    <div class="profile-details">
+        <div class="detail-card">
+            <h3>Informations personnelles</h3>
+            <p><strong>Email :</strong> {{ user.email }}</p>
+            <p><strong>Genre :</strong> {{ user.genre }}</p>
+            <p><strong>Âge :</strong> {{ user.age }} ans</p>
+            {% if user.birthd %}
+                <p><strong>Date de naissance :</strong> {{ user.birthd|date('d/m/Y') }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="detail-card">
+            <h3>Informations du compte</h3>
+            <p><strong>Type :</strong> {{ user.type }}</p>
+            <p><strong>Statut :</strong> {{ user.isApproved ? 'Compte vérifié' : 'En attente de vérification' }}</p>
+            <p><strong>Rôles :</strong> {{ user.roles|join(', ') }}</p>
+        </div>
+    </div>
+    
+    <div class="profile-actions">
+        <a href="{{ path('app_homepage') }}" class="btn btn-primary text-white">
+            <i class="fas fa-arrow-left me-2"></i> Retour à l'accueil
+        </a>
+            <a href="{{ path('app_edit_profile') }}" class="btn btn-outline-primary ms-2">            
+            <i class="fas fa-edit me-2"></i> Modifier mon profil
+        </a>
+    </div>
+</div>
+{% endblock %}

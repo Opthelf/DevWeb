@@ -13,8 +13,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\UserActionLogger;
 
+
 class RegistrationController extends AbstractController
 {
+
+
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
@@ -33,6 +37,11 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             $this->actionLogger->log('Inscription', 1.0); // Exemple d'action enregistrée
 
+            $emailService->sendRegistrationConfirmation(
+                $user->getEmail(),
+                $user->getUsername()
+            );
+
 
             // do anything else you need here, like send an email
             //return $security->login($user, 'form_login', 'main');
@@ -42,5 +51,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
+
+        
     }
 }
