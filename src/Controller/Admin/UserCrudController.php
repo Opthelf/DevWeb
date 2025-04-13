@@ -12,6 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 
 
@@ -34,9 +35,12 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            IntegerField::new('age')->hideOnIndex(),
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
             TextField::new('username'),
+            TextField::new('nom')->hideOnIndex(),
+            TextField::new('prenom')->hideOnIndex(),
             ChoiceField::new('roles')
             ->setChoices([
                 'Visiteur' => 'ROLE_VISITOR',
@@ -54,6 +58,13 @@ class UserCrudController extends AbstractCrudController
             ])
              // Permet de choisir plusieurs rôles
             ->setHelp('Choisissez un ou plusieurs rôles'),
+            ChoiceField::new('genre')
+            ->setChoices([
+                'Homme' => 'homme',
+                'Femme' => 'femme',
+                'Autre' => 'autre',
+            ]),
+            
             TextField::new('password')->onlyOnForms(), // Masque le champ mot de passe dans la liste
         ];
     }

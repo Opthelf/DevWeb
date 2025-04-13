@@ -67,9 +67,9 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToRoute('Supprimer tous le journal', 'fas fa-trash', 'admin_delete_category', [
                 'entity' => 'UserActionLog',
             ])->setCssClass('text-danger');
-            
-           
         }
+           
+        
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
