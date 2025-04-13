@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\UserActionLogger;
 
 class RegistrationController extends AbstractController
 {
@@ -30,6 +31,8 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->actionLogger->log('Inscription', 1.0); // Exemple d'action enregistrée
+
 
             // do anything else you need here, like send an email
             //return $security->login($user, 'form_login', 'main');

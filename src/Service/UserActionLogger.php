@@ -27,7 +27,10 @@ class UserActionLogger
         //dd($username); // Récupérer le nom d'utilisateur depuis la session
         $log = new UserActionLog();
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
-        $user->setPoints($user->getPoints() + $points);
+        if ($username != 'anonymous'){
+            $user->setPoints($user->getPoints() + $points);
+        }
+        //$user->setPoints($user->getPoints() + $points);
         $log->setUsername($username);
         $log->setAction($action);
 
