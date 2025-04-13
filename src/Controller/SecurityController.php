@@ -10,6 +10,12 @@ use App\Service\UserActionLogger;
 
 class SecurityController extends AbstractController
 {
+    private UserActionLogger $actionLogger;
+    
+    public function __construct(UserActionLogger $actionLogger)
+    {
+        $this->actionLogger = $actionLogger;
+    }
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
