@@ -13,9 +13,16 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\UserActionLogger;
 
-
 class RegistrationController extends AbstractController
 {
+
+    private UserActionLogger $actionLogger;
+
+    public function __construct(UserActionLogger $actionLogger)
+    {
+        $this->actionLogger = $actionLogger;
+    }
+
 
 
 
@@ -37,11 +44,6 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             $this->actionLogger->log('Inscription', 1.0); // Exemple d'action enregistrée
 
-            $emailService->sendRegistrationConfirmation(
-                $user->getEmail(),
-                $user->getUsername()
-            );
-
 
             // do anything else you need here, like send an email
             //return $security->login($user, 'form_login', 'main');
@@ -51,7 +53,5 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
-
-        
     }
 }
