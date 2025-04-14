@@ -107,6 +107,16 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .registration-footer p {
+            display: inline;
+        }
+
+        .registration-footer a.login-link {
+            margin-left: 0.5rem;
+            display: inline;
+
+        }
     </style>
 {% endblock %}
 
@@ -188,7 +198,11 @@
     {{ form_end(registrationForm) }}
 
     <div class="registration-footer">
-        <p>Déjà un compte ? <a href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt me-1"></i> Se connecter</a></p>
+        <p>Déjà un compte ?</p>
+        <a href="{{ path('app_login') }}" class="login-link">
+            <i class="fas fa-sign-in-alt me-1"></i> Se connecter
+        </a>
+    <div class="home-link">
         <a href="{{ path('app_homepage') }}"><i class="fas fa-arrow-left me-1"></i> Retour à l'accueil</a>
     </div>
 </div>
