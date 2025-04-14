@@ -12,19 +12,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\UserActionLogger;
+use App\Service\EmailService;
+
 
 class RegistrationController extends AbstractController
 {
-
     private UserActionLogger $actionLogger;
+    private EmailService $emailService;
 
-    public function __construct(UserActionLogger $actionLogger)
-    {
+    public function __construct(
+        UserActionLogger $actionLogger,
+        EmailService $emailService
+    ) {
         $this->actionLogger = $actionLogger;
+        $this->emailService = $emailService;
     }
-
-
-
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
@@ -34,24 +36,29 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
-
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setPassword(
+                $userPasswordHasher->hashPassword($user, $plainPassword)
+            );
 
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->actionLogger->log('Inscription', 1.0); // Exemple d'action enregistrée
 
+            // Log de l'action
+            $this->actionLogger->log('Inscription', 1.0);
 
-            // do anything else you need here, like send an email
-            //return $security->login($user, 'form_login', 'main');
+            // Envoi de l'email de confirmation
+            $this->emailService->sendRegistrationConfirmation(
+                $user->getEmail(),
+                $user->getUsername()
+            );
+
+            $this->addFlash('success', 'Un email de confirmation vous a été envoyé.');
             return $this->redirectToRoute('app_homepage');
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
+            'registrationForm' => $form->createView(),
         ]);
     }
 }
