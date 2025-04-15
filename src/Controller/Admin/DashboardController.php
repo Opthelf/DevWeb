@@ -68,6 +68,9 @@ class DashboardController extends AbstractDashboardController
                 'entity' => 'UserActionLog',
             ])->setCssClass('text-danger');
         }
+
+        yield MenuItem::linkToRoute('Retour à l\'accueil', 'fa fa-home', 'app_homepage')
+        ->setCssClass('mb-3');
            
         
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
